@@ -1,0 +1,6 @@
+CREATE TABLE dnas(
+  id VARCHAR(32) NOT NULL,
+  sequence JSON NOT NULL,
+  hasMutation TINYINT NOT NULL,
+  PRIMARY KEY(id)
+)
