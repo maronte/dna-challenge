@@ -1,4 +1,4 @@
-CREATE TABLE dnas(
+CREATE TABLE DNAs(
   id VARCHAR(32) NOT NULL,
   sequence JSON NOT NULL,
   hasMutation TINYINT NOT NULL,
