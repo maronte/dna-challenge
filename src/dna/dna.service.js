@@ -48,13 +48,19 @@ class DNAService {
    */
   async getStats () {
     const groupedDnas = await this.repository.getGrupedByHasMutation()
+    const countMutations = groupedDnas.find(
+      dna => dna.dataValues.hasMutation
+    )
+    const countNoMutation = groupedDnas.find(
+      dna => dna.dataValues.hasMutation === false
+    )
     const stats = {
-      count_mutations: groupedDnas.find(
-        dna => dna.dataValues.hasMutation
-      ).dataValues.total,
-      count_no_mutation: groupedDnas.find(
-        dna => !dna.dataValues.hasMutation
-      ).dataValues.total
+      count_mutations: countMutations !== undefined
+        ? countMutations.dataValues.total
+        : 0,
+      count_no_mutation: countNoMutation !== undefined
+        ? countNoMutation.dataValues.total
+        : 0
     }
     stats.ratio = stats.count_mutations / stats.count_no_mutation
     return stats
