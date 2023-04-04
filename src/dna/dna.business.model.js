@@ -9,7 +9,13 @@ class DNA {
    */
   constructor (data) {
     this.sequence = data
+    this.setIdentifiableSequence()
   }
+
+  /**
+   * Allowed values for DNA Sequence as regex pattern
+   */
+  static VALID_VALUES = /^[ACGT]+$/
 
   /**
    * Transform and sets the sequence into an array of string arrays to
@@ -57,9 +63,14 @@ class DNA {
    *
    * So this is a DNA with mutations because has 4 patterns.
    *
+   * This method will set the calculated value into the
+   * "hasMutationValue" property.
+   *
    * @returns {boolean}
    */
   hasMutation () {
+    if (this.hasMutationValue !== undefined) return this.hasMutationValue
+
     // Set processable sequence to process the mutation calculation
     this.setProcessableSequence()
 
@@ -127,6 +138,8 @@ class DNA {
         }
       }
     }
+
+    this.hasMutationValue = hasMutation
     return hasMutation
   }
 
