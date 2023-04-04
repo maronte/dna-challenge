@@ -1,0 +1,47 @@
+###USE FOR DEV
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  dna-prod-lambda
+
+  Sample SAM Template for dna-prod-lambda
+
+Globals:
+  Function:
+    Environment:
+      Variables:
+        Environment: prod
+        databaseName: "{{resolve:secretsmanager:dna:SecretString:databaseName}}"
+        databasePort: "{{resolve:secretsmanager:dna:SecretString:databasePort}}"
+        databaseUser: "{{resolve:secretsmanager:dna:SecretString:databaseUser}}"
+        databasePassword: "{{resolve:secretsmanager:dna:SecretString:databasePassword}}"
+        databaseHost: "{{resolve:secretsmanager:dna:SecretString:databaseHost}}"
+
+Resources:
+  DnaProdLambda:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ./
+      Handler: src/lambda.handler
+      Runtime: nodejs16.x
+      MemorySize: 1024
+      Timeout: 30
+      FunctionName: dna-prod-lambda
+      Events:
+        ProxyResource:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: any
+
+Outputs:
+  DnaProdLambdaApi:
+    Description: API Gateway endpoint URL for prod stage for dna lambda function
+    Value:
+      Fn::Sub: https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/
+  DnaProdLambdaFunction:
+    Description: Dna Lambda Function ARN
+    Value: !Sub DnaProdLambdaFunction.Arn
+  DnaProdLambdaIamRole:
+    Description: Implicit IAM Role created for dna lambda function
+    Value: !Sub DnaProdLambdaIamRole.Arn

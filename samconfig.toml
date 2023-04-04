@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "dna"
+s3_bucket = "dna-prod-lambda"
+region = "us-west-1"
+profile = "default"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
