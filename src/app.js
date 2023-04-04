@@ -2,6 +2,7 @@
 require('express-async-errors')
 const express = require('express')
 const cors = require('cors')
+const loggerMiddleware = require('./utils/request-logger')
 const { loadSequelize } = require('./database/database')
 const { configureRoutes } = require('./routes')
 const { errorHandling } = require('./utils/error-handler')
@@ -13,6 +14,9 @@ const initializeApp = async () => {
   // Configuration for express app
   app.use(express.json())
   app.use(cors())
+
+  // Add request logger
+  app.use(loggerMiddleware)
 
   // Init DB
   await loadSequelize()
