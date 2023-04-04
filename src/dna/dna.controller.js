@@ -40,7 +40,7 @@ const findOrCreate = async (req, res) => {
 const getStats =
     async (req, res) => {
       const dnaStats = await dnaService.getStats()
-      res.status(200).json({ data: dnaStats, status: 200 }).send()
+      res.status(200).json({ data: dnaStats }).send()
     }
 
 module.exports = {
