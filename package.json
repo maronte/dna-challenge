@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nyc mocha test/**/*.test.js --exit",
     "lint": "standard --fix",
-    "local-dev": "node --watch src/local.js"
+    "local-dev": "node --watch src/local.js",
+    "local": "node rc/local.js"
   },
   "keywords": [
     "api",
