@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const DNA = require('../../src/dna/dna')
+const DNA = require('../../../src/dna/dna.business.model')
 
 describe('DNA Class Tests', () => {
   context('hasMutation', () => {
