@@ -6,6 +6,7 @@ const sequelize = new Sequelize({
   database: variables.database.name,
   port: variables.database.port,
   username: variables.database.user,
+  password: variables.database.pass,
   host: variables.database.host,
   pool: {
     max: 1,
