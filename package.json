@@ -4,7 +4,7 @@
   "description": "API For ADN Mutation Detection",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha test/**/*.test.js",
+    "test": "nyc mocha test/**/*.test.js --exit",
     "lint": "standard --fix",
     "local-dev": "node --watch src/local.js"
   },
